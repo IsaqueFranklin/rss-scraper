@@ -7,11 +7,12 @@ import (
 	"net/http"
 	"os"
 
+	_ "github.com/lib/pq" // Import for side effects to register the driver
+
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/isaquefranklin/rss-scraper/internal/database"
 	"github.com/joho/godotenv"
-	"github.com/pressly/goose/v3/database"
 )
 
 type apiConfig struct {
@@ -66,7 +67,7 @@ func main() {
 	}
 
 	log.Printf("Server starting on port %v", portString)
-	err := srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}
